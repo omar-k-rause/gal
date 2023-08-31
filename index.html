@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Dispatch Center</title>
+<style>
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #aaa8a8;
+    color: #333;
+  }
+
+  /* Header styles */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  /* Navigation menu styles */
+  .menu-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
+    padding: 5px;
+    transition: transform 0.3s ease;
+    z-index: 2;
+  }
+
+  .menu-button:hover {
+    transform: scale(1.1);
+  }
+
+  .menu-bar {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-bar:hover {
+    transform: scaleX(1.2);
+  }
+
+  /* Footer styles */
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  /* Side menu styles */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -400px;
+    width: 300px;
+    height: 100%;
+    background-color: #333;
+    padding: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .menu-item {
+    margin: 10px 0;
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .menu-item:hover {
+    background-color: #555;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  /* Video styles */
+  .video-container {
+    position: relative;
+  }
+
+  .video-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 24px;
+    color: rgb(144, 197, 240);
+    z-index: 2;
+  }
+
+  /* Photo gallery styles */
+  .gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .gallery-cell {
+    margin: 0 20px;
+    position: relative;
+  }
+
+  .gallery-cell img {
+    width: 500px;
+    height: 500px;
+    border: 2px solid white;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-cell img:hover {
+    transform: scale(1.1);
+  }
+
+  .gallery-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .gallery-cell:hover .gallery-text {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="video-container">
+    <video autoplay loop muted playsinline style="object-fit: cover; width: 100%; height: 100vh;">
+      <source src="images/Ventura County Fire Department Response Compilation - Part 2.mp4" type="video/mp4">
+      Your browser does not support the video element.
+    </video>
+    <div class="video-text">
+      <h1>Welcome to Code-3 Photography</h1>
+      <p>Providing Safety Information for Ventura County</p>
+    </div>
+  </div>
+
+  <header>
+    <button class="menu-button" id="menuButton">
+      <div class="menu-bar"></div>
+      <div class="menu-bar"></div>
+      <div class="menu-bar"></div>
+    </button>
+  </header>
+  
+  <div class="side-menu" id="sideMenu">
+    <span class="close-button" id="closeButton">&times;</span>
+    <!-- Inside your side menu -->
+    <div class="menu-item" onclick="window.location.href='Live.html'">Live Radios</div>
+    <div class="menu-item" onclick="window.location.href='fire.html'">Fire Department</div>
+    <div class="menu-item" onclick="window.location.href='sheriff.html'">Sheriff Office</div>
+    <div class="menu-item" onclick="window.location.href='contact.html'">Contact</div>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-cell">
+      <a href="cs.html">
+        <img src="images/engfront.png" alt="Photo 1">
+        <div class="gallery-text">Click to see more Ventura County Fire Department info</div>
+      </a>
+    </div>
+    <div class="gallery-cell">
+      <a href="cs.html">
+        <img src="images/download.png" alt="Photo 2">
+        <div class="gallery-text">Click to see more Ventura County Sheriff's Office info</div>
+      </a>
+    </div>
+    <div class="gallery-cell">
+      <a href="Live.html">
+        <img src="images/champaign-7976.png" alt="Photo 3">
+        <div class="gallery-text">Click to Listen to Live Radio</div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Contact Me: JrCalifornian@RoadRunner.com | Phone: (619) 369-6670</p>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const sideMenu = document.getElementById("sideMenu");
+    const closeButton = document.getElementById("closeButton");
+
+    menuButton.addEventListener("click", () => {
+      sideMenu.style.left = "0";
+    });
+
+    closeButton.addEventListener("click", () => {
+      sideMenu.style.left = "-400px";
+    });
+  </script>
+</body>
+</html>

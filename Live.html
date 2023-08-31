@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Dispatch Center</title>
+<style>
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #aaa8a8;
+    color: #333;
+  }
+
+  /* Header styles */
+  header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  /* Navigation menu styles */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+    padding: 5px;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-button:hover {
+    transform: scale(1.1);
+  }
+
+  .menu-bar {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-bar:hover {
+    transform: scaleX(1.2);
+  }
+
+  /* Container for the audio player */
+  .audio-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80vh; /* Adjust the height to make space for the footer */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* Audio player style */
+  .audio-player {
+    text-align: center;
+    flex: 1;
+    padding: 20px;
+  }
+
+  /* Play and pause button style */
+  .play-pause-button1 {
+  background-color: #654321;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 100px;
+  margin: 0 auto; /* Center the button horizontally */
+  display: block; /* Change to "inline-block" if necessary */
+}
+.play-pause-button2 {
+  background-color: #ff1900;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 100px;
+  margin: 0 auto; /* Center the button horizontally */
+  display: block; /* Change to "inline-block" if necessary */
+}
+
+.play-pause-button3 {
+  background-color: #695037;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 100px;
+  margin: 0 auto; /* Center the button horizontally */
+  display: block; /* Change to "inline-block" if necessary */
+}
+
+
+  .play-pause-button:hover {
+    background-color: #c0392b;
+  }
+
+  /* Hide the default audio controls */
+  audio {
+    display: none;
+  }
+
+  /* Text between audio players */
+  .dispatch-text {
+    font-size: 18px;
+    font-style: italic;
+    color: #ffffff;
+    margin-top: 10px;
+  }
+
+  /* Photos above audio players */
+  .audio-photo {
+    width: 75%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .audio-photo:hover {
+    transform: scale(1.1);
+  }
+
+  /* Footer styles */
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  /* Side menu styles */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -400px; /* Initially hidden */
+    width: 300px;
+    height: 100%;
+    background-color: #333;
+    padding: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .menu-item {
+    margin: 10px 0;
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .menu-item:hover {
+    background-color: #555;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  /* Volume slider styles */
+input[type="range"] {
+  width: 50%;
+  height: 6px;
+  appearance: none;
+  background-color: #ddd;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+/* Add these styles to your existing CSS */
+/* Style for Audio 1 slider knob */
+#volumeSlider1::-webkit-slider-thumb {
+  background-color: #ff7464; /* Change to your desired color */
+}
+
+#volumeSlider1::-moz-range-thumb {
+  background-color: #ff7464; /* Change to your desired color */
+}
+
+/* Style for Audio 2 slider knob */
+#volumeSlider2::-webkit-slider-thumb {
+  background-color: #695037; /* Change to your desired color */
+}
+
+#volumeSlider2::-moz-range-thumb {
+  background-color: #695037; /* Change to your desired color */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #0099ff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #654321;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background-color: #654321;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  background-color: #654321;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* Style for the Audio 1 Extend button */
+#extendButton1 {
+  background-color: #f81900; /* Change to your desired color */
+}
+
+/* Style for the Audio 2 Extend button */
+#extendButton2 {
+  background-color: #654321; /* Change to your desired color */
+}
+
+#extendButton3 {
+  background-color: #f81900; /* Change to your desired color */
+}
+
+.extend-button {
+  /* Common styles for both Extend buttons */
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 100px;
+  margin: 0 auto; /* Center the button horizontally */
+  display: block; /* Change to "inline-block" if necessary */
+}
+
+.extend-button:hover {
+  background-color: #333; /* Common hover color for both buttons */
+}
+
+</style>
+</head>
+<body>
+  <header>
+    <button class="menu-button" id="menuButton">
+      <div class="menu-bar"></div>
+      <div class="menu-bar"></div>
+      <div class="menu-bar"></div>
+    </button>
+    <h1>Emergency Services Live Radio</h1>
+    <p>Fire Dept. & Sheriff Office</p>
+  </header>
+
+  <div class="side-menu" id="sideMenu">
+    <span class="close-button" id="closeButton">&times;</span>
+<!-- Inside your side menu -->
+<div class="menu-item" onclick="window.location.href='index.html'">Home</div>
+<div class="menu-item" onclick="window.location.href='fire.html'">Fire Department</div>
+<div class="menu-item" onclick="window.location.href='sheriff.html'">Sheriff Office</div>
+<div class="menu-item" onclick="window.location.href='contact.html'">Contact</div>
+
+  </div>
+
+  <div class="audio-container">
+	<!-- Audio 1 - Fire Department -->
+	<div class="audio-player">
+	  <img class="audio-photo" src="https://firesafeojai.org/wp-content/uploads/2022/06/vcfd_new_logo-1.png" alt="Fire Department">
+	  <button class="play-pause-button2" id="playPause1">Play</button>
+    <button class="extend-button" id="extendButton1">Extend</button>
+	  <input type="range" id="volumeSlider1" min="0" max="1" step="0.01" value="1">
+	  <audio id="audio1" controls>
+		<source src="https://bit.ly/3PezMtH" type="audio/mpeg"> / <!--https://listen.broadcastify.com/qnt2rpm9v1gckh0.mp3?nc=50438-->
+		Your browser does not support the audio element.
+	  </audio>
+	  <p class="dispatch-text">Ventura County Fire Dept. CH 1,2,5,8</p>
+	</div>
+
+    <!-- Audio 2 - Sheriff Office -->
+    <div class="audio-player">
+		<img class="audio-photo" src="https://i.vimeocdn.com/portrait/43309464_640x640" alt="Police Department">
+		<button class="play-pause-button3" id="playPause2">Play</button>
+    <button class="extend-button" id="extendButton2">Extend</button>
+		<input type="range" id="volumeSlider2" min="0" max="1" step="0.01" value="1">
+		<audio id="audio2" controls>
+		  <source src="https://bit.ly/3OH8ASQ" type="audio/mpeg"> <!--https://broadcastify.cdnstream1.com/31780-->
+		  Your browser does not support the audio element.
+		</audio>
+		<p class="dispatch-text">Ventura County Sheriff Dispatch - West</p>
+	  </div>
+	</div>
+
+
+  <footer>
+    <p>Contact Me: JrCalifornian@RoadRunner.com | Phone: (619) 369-6670</p>
+  </footer>
+
+<script>
+  // Audio 3 Extend Button
+
+// Audio 3
+const audio3 = document.getElementById("audio3");
+
+
+// Audio 1 Extend Button
+const extendButton1 = document.getElementById("extendButton1");
+
+extendButton1.addEventListener("click", () => {
+  const newWindow = window.open("fd.html", "_blank", "width=800,height=600");
+  if (newWindow) {
+    newWindow.focus();
+    location.reload(); // Reload the current page
+  }
+});
+
+// Audio 2 Extend Button
+const extendButton2 = document.getElementById("extendButton2");
+
+extendButton2.addEventListener("click", () => {
+  const newWindow = window.open("SO.html", "_blank", "width=800,height=600");
+  if (newWindow) {
+    newWindow.focus();
+    location.reload(); // Reload the current page
+  }
+});
+  const menuButton = document.getElementById("menuButton");
+  const sideMenu = document.getElementById("sideMenu");
+  const closeButton = document.getElementById("closeButton");
+  const volumeSlider1 = document.getElementById("volumeSlider1");
+  const volumeSlider2 = document.getElementById("volumeSlider2");
+
+  volumeSlider1.addEventListener("input", () => {
+    audio1.volume = volumeSlider1.value;
+  });
+
+  volumeSlider2.addEventListener("input", () => {
+    audio2.volume = volumeSlider2.value;
+  });
+  menuButton.addEventListener("click", () => {
+    sideMenu.style.left = "0";
+  });
+
+  closeButton.addEventListener("click", () => {
+    sideMenu.style.left = "-400px";
+  });
+
+  // Audio 1
+  const audio1 = document.getElementById("audio1");
+  const playPause1Button = document.getElementById("playPause1");
+
+  playPause1Button.addEventListener("click", () => {
+    if (audio1.paused) {
+      audio1.play();
+      playPause1Button.textContent = "Pause";
+    } else {
+      audio1.pause();
+      playPause1Button.textContent = "Play";
+    }
+  });
+
+  // Audio 2
+  const audio2 = document.getElementById("audio2");
+  const playPause2Button = document.getElementById("playPause2");
+
+  playPause2Button.addEventListener("click", () => {
+    if (audio2.paused) {
+      audio2.play();
+      playPause2Button.textContent = "Pause";
+    } else {
+      audio2.pause();
+      playPause2Button.textContent = "Play";
+    }
+  });
+</script>
+</body>
+</html>

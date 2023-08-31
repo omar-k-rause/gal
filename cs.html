@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #aaa8a8;
+    margin: 0;
+    color: white; /* Text color set to white */
+  }
+  
+  .message {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .countdown {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+  <div class="message">
+    <h1>Coming Soon</h1>
+    <p>We are working on something exciting. Stay tuned!</p>
+  </div>
+
+  <div class="countdown">
+    <p>You will be redirected in <span id="timer">10</span> seconds.</p>
+  </div>
+
+  <script>
+    let seconds = 10; // Set the countdown time in seconds
+    const timerElement = document.getElementById("timer");
+    
+    const countdown = setInterval(function() {
+      seconds--;
+      timerElement.textContent = seconds;
+      
+      if (seconds === 0) {
+        clearInterval(countdown);
+        window.location.href = 'index.html'; // Replace with your desired URL
+      }
+    }, 1000); // 1 second
+  </script>
+</body>
+</html>
